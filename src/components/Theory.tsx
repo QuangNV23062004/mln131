@@ -1,4 +1,5 @@
 "use client";
+import HoverableText from "@/app/utils/HoverableText";
 import React, { useEffect, useState } from "react";
 
 export default function Theory({ id }: { id: string }) {
@@ -30,11 +31,17 @@ export default function Theory({ id }: { id: string }) {
             <div className="w-2 h-8 bg-orange-600 rounded-full mr-4"></div>
             Khái niệm
           </h3>
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-600">
-            Liên minh giai cấp, tầng lớp là sự liên kết chính trị - xã hội giữa
+          <HoverableText
+            text="Liên minh giai cấp, tầng lớp là sự liên kết chính trị - xã hội giữa
             các giai cấp và tầng lớp khác nhau trong xã hội, dựa trên lợi ích
-            căn bản, lâu dài, để cùng thực hiện nhiệm vụ cách mạng.
-          </p>
+            căn bản, lâu dài, để cùng thực hiện nhiệm vụ cách mạng."
+          >
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-600">
+              Liên minh giai cấp, tầng lớp là sự liên kết chính trị - xã hội
+              giữa các giai cấp và tầng lớp khác nhau trong xã hội, dựa trên lợi
+              ích căn bản, lâu dài, để cùng thực hiện nhiệm vụ cách mạng.
+            </p>
+          </HoverableText>
         </div>
 
         <div className="transform transition-all duration-1000 delay-300 translate-y-0 opacity-100">
@@ -61,19 +68,21 @@ export default function Theory({ id }: { id: string }) {
                     {index + 1}
                   </span>
                 </div>
-                <p className="text-lg text-gray-700 leading-relaxed">
-                  {index === 2 ? (
-                    <>
-                      Liên minh giai cấp tạo nên{" "}
-                      <strong className="text-red-600 bg-red-50 px-2 py-1 rounded">
-                        khối đại đoàn kết dân tộc
-                      </strong>
-                      , vừa là điều kiện, vừa là mục tiêu của cách mạng XHCN.
-                    </>
-                  ) : (
-                    item
-                  )}
-                </p>
+                <HoverableText text={item}>
+                  <p className="text-lg text-gray-700 leading-relaxed">
+                    {index === 2 ? (
+                      <>
+                        Liên minh giai cấp tạo nên{" "}
+                        <strong className="text-red-600 bg-red-50 px-2 py-1 rounded">
+                          khối đại đoàn kết dân tộc
+                        </strong>
+                        , vừa là điều kiện, vừa là mục tiêu của cách mạng XHCN.
+                      </>
+                    ) : (
+                      item
+                    )}{" "}
+                  </p>
+                </HoverableText>
               </div>
             ))}
           </div>

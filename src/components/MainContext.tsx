@@ -1,4 +1,5 @@
 "use client";
+import HoverableText from "@/app/utils/HoverableText";
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
 
@@ -53,19 +54,23 @@ export default function MainContext({ id }: { id: string }) {
                   : "hover:border-green-200"
               }`}
             >
-              <button
+              <div
                 onClick={() =>
                   setActiveSection(activeSection === index ? -1 : index)
                 }
                 className="w-full p-6 text-left flex items-center justify-between hover:bg-green-50 rounded-2xl transition-all duration-300"
               >
-                <h3
-                  className={`text-xl md:text-2xl font-semibold transition-colors ${
-                    activeSection === index ? "text-green-600" : "text-gray-900"
-                  }`}
-                >
-                  {section.title}
-                </h3>
+                <HoverableText text={JSON.stringify(section)}>
+                  <h3
+                    className={`text-xl md:text-2xl font-semibold transition-colors ${
+                      activeSection === index
+                        ? "text-green-600"
+                        : "text-gray-900"
+                    }`}
+                  >
+                    {section.title}
+                  </h3>
+                </HoverableText>
                 <ArrowRight
                   className={`w-6 h-6 transition-all duration-300 ${
                     activeSection === index
@@ -73,7 +78,7 @@ export default function MainContext({ id }: { id: string }) {
                       : "text-gray-400"
                   }`}
                 />
-              </button>
+              </div>
 
               <div
                 className={`overflow-hidden transition-all duration-500 ${
@@ -84,6 +89,7 @@ export default function MainContext({ id }: { id: string }) {
               >
                 <div className="px-6 pb-6">
                   <ul className="space-y-3">
+                    {" "}
                     {section.content.map((item, itemIndex) => (
                       <li
                         key={itemIndex}
