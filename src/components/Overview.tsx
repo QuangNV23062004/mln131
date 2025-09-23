@@ -1,3 +1,4 @@
+import HoverableText from "@/app/utils/HoverableText";
 import React from "react";
 
 export default function Overview({ id }: { id: string }) {
@@ -34,32 +35,40 @@ export default function Overview({ id }: { id: string }) {
               <div className="w-12 h-12 bg-red-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">1</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">
-                Giai cấp công nhân
-              </h3>
-              <p className="text-gray-600 text-sm">
-                Lực lượng lãnh đạo trong quá trình xây dựng CNXH
-              </p>
+              <HoverableText text="giai cấp công nhân lại là lực lượng lãnh đạo trong quá trình xây dựng CNXH">
+                <h3 className="font-semibold text-gray-900 mb-2">
+                  Giai cấp công nhân
+                </h3>
+                <p className="text-gray-600 text-sm">
+                  Lực lượng lãnh đạo trong quá trình xây dựng CNXH
+                </p>
+              </HoverableText>
             </div>
 
             <div className="text-center p-6 bg-yellow-50 rounded-xl border border-yellow-100">
               <div className="w-12 h-12 bg-yellow-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">2</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Nông dân</h3>
-              <p className="text-gray-600 text-sm">
-                Đồng minh chủ yếu của giai cấp công nhân
-              </p>
+              <HoverableText text="nông dân là đồng minh chủ yếu của giai cấp công nhân">
+                {" "}
+                <h3 className="font-semibold text-gray-900 mb-2">Nông dân</h3>
+                <p className="text-gray-600 text-sm">
+                  Đồng minh chủ yếu của giai cấp công nhân
+                </p>
+              </HoverableText>
             </div>
 
             <div className="text-center p-6 bg-blue-50 rounded-xl border border-blue-100">
               <div className="w-12 h-12 bg-blue-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                 <span className="text-white font-bold text-xl">3</span>
               </div>
-              <h3 className="font-semibold text-gray-900 mb-2">Trí thức</h3>
-              <p className="text-gray-600 text-sm">
-                Lực lượng quan trọng trong sự nghiệp xây dựng đất nước
-              </p>
+              <HoverableText text="giai cấp trí thức là Lực lượng quan trọng trong sự nghiệp xây dựng đất nước">
+                {" "}
+                <h3 className="font-semibold text-gray-900 mb-2">Trí thức</h3>
+                <p className="text-gray-600 text-sm">
+                  Lực lượng quan trọng trong sự nghiệp xây dựng đất nước
+                </p>
+              </HoverableText>
             </div>
           </div>
         </div>

@@ -1,9 +1,8 @@
 "use client";
-
-import axios, { AxiosError } from "axios";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { useAIChat } from "@/app/context/AIChatContext";
 
 export default function AIChatOverlay({
   onClose,
@@ -12,90 +11,26 @@ export default function AIChatOverlay({
   onClose: () => void;
   isOpen: boolean;
 }) {
-  const [messages, setMessages] = useState([
-    {
-      from: "AI",
-      text: "Xin chào, tôi có thể làm gì cho bạn ? ",
-      timestamp: new Date(),
-    },
-  ]);
-  const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
+  const { messages, isTyping, handleClearMessages, openChatAndSendPrompt } =
+    useAIChat();
   const [isMinimized, setIsMinimized] = useState(false);
+  const [input, setInput] = useState(""); // Local for manual input
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  const handleClearMessages = () => {
-    setMessages([
-      {
-        from: "AI",
-        text: "Xin chào, tôi có thể làm gì cho bạn ?",
-        timestamp: new Date(),
-      },
-    ]);
-  };
-
-  const handleSend = async () => {
+  const handleSendManual = async () => {
     if (!input.trim()) return;
-
-    const userMessage = { from: "user", text: input, timestamp: new Date() };
-    const inputText = input; // Store input before clearing
-
-    // Add user message and clear input immediately
-    setMessages((prevMessages) => [...prevMessages, userMessage]);
+    await openChatAndSendPrompt(input);
     setInput("");
-    setIsTyping(true);
-
-    try {
-      const response = await axios.post(
-        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
-        {
-          contents: [
-            {
-              parts: [
-                {
-                  text: `Bạn là chuyên gia về Chủ nghĩa xã hội. Trả lời bằng tiếng Việt, rõ ràng, ngắn gọn, dựa trên kiến thức của chương 5: Cơ cấu xã hội – giai cấp và liên minh giai cấp trong thời kỳ quá độ lên CNXH. Nếu câu hỏi không liên quan thì hãy trả lời nhưng nhắc nhở người dùng một cách nhẹ nhàng, câu hỏi từ người dùng: ${inputText}`,
-                },
-              ],
-            },
-          ],
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "X-goog-api-key": process.env.NEXT_PUBLIC_GEMINI_KEY,
-          },
-        }
-      );
-      const reply = response.data.candidates[0].content.parts[0].text;
-
-      // Add AI response
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        { from: "AI", text: reply, timestamp: new Date() },
-      ]);
-    } catch (error) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
-        {
-          from: "AI",
-          text: "Xin hãy thử lại sau",
-          timestamp: new Date(),
-        },
-      ]);
-    } finally {
-      setIsTyping(false);
-    }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
-      handleSend();
+      handleSendManual();
     }
   };
 
@@ -239,7 +174,7 @@ export default function AIChatOverlay({
             {/* Send Button */}
             <button
               type="button"
-              onClick={handleSend}
+              onClick={handleSendManual}
               disabled={!input.trim() || isTyping}
               className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 transform hover:scale-105 active:scale-95 disabled:scale-100 shadow-lg shadow-red-500/25 disabled:shadow-none"
               aria-label="Send message"
