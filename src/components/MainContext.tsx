@@ -2,6 +2,7 @@
 import HoverableText from "@/app/utils/HoverableText";
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
+import Motion from "./Motion";
 
 export default function MainContext({ id }: { id: string }) {
   const [activeSection, setActiveSection] = useState(0);
@@ -37,10 +38,10 @@ export default function MainContext({ id }: { id: string }) {
       className="py-20 bg-white max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
     >
       <div className="text-center mb-16">
-        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 transform transition-all duration-1000 translate-y-0 opacity-100">
+        <Motion className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
           Nội dung chính
-        </h2>
-        <div className="w-24 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full transform transition-all duration-1000 scale-x-100"></div>
+        </Motion>
+        <Motion className="w-24 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full" delay={0.2} children={undefined}></Motion>
       </div>
 
       <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">

@@ -1,5 +1,6 @@
 import { ArrowRight, BookOpen } from "lucide-react";
 import React from "react";
+import Motion from "./Motion";
 
 export default function Hero({
   scrollToSection,
@@ -39,7 +40,7 @@ export default function Hero({
 
       {/* Content */}
       <div className="relative z-10 max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
+        <Motion className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-8 leading-tight">
           <span className="block mb-4 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent">
             Liên minh giai cấp
           </span>
@@ -49,14 +50,14 @@ export default function Hero({
           <span className="block text-3xl md:text-4xl lg:text-5xl font-semibold text-red-300">
             quá độ lên CNXH ở Việt Nam
           </span>
-        </h1>
+        </Motion>
 
-        <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed">
+        <Motion className="text-xl md:text-2xl text-white/90 mb-12 max-w-4xl mx-auto leading-relaxed" delay={0.3}>
           Khám phá sự phát triển của liên minh giai cấp công nhân với nông dân
           và trí thức trong quá trình xây dựng chủ nghĩa xã hội tại Việt Nam
-        </p>
+        </Motion>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+        <Motion className="flex flex-col sm:flex-row gap-4 justify-center items-center" delay={0.5}>
           <button
             onClick={() => scrollToSection("overview")}
             className="group inline-flex items-center px-8 py-4 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-2xl"
@@ -72,7 +73,7 @@ export default function Hero({
             <BookOpen className="w-5 h-5 mr-2" />
             Lý thuyết cơ bản
           </button>
-        </div>
+        </Motion>
       </div>
     </section>
   );
