@@ -3,6 +3,7 @@ import HoverableText from "@/app/utils/HoverableText";
 import { ArrowRight } from "lucide-react";
 import React, { useState } from "react";
 import Motion from "./Motion";
+import MotionHover from "./MotionHover";
 
 export default function MainContext({ id }: { id: string }) {
   const [activeSection, setActiveSection] = useState(0);
@@ -44,77 +45,82 @@ export default function MainContext({ id }: { id: string }) {
         <Motion className="w-24 h-1 bg-gradient-to-r from-green-600 to-blue-600 mx-auto rounded-full" delay={0.2} children={undefined}></Motion>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
-        <div className="space-y-6">
-          {sections.map((section, index) => (
-            <div
-              key={index}
-              className={`border border-gray-200 rounded-2xl transition-all duration-500 ${
-                activeSection === index
-                  ? "shadow-lg border-green-300"
-                  : "hover:border-green-200"
-              }`}
-            >
-              <div
-                onClick={() =>
-                  setActiveSection(activeSection === index ? -1 : index)
-                }
-                className="w-full p-6 text-left flex items-center justify-between hover:bg-green-50 rounded-2xl transition-all duration-300"
-              >
-                <HoverableText text={JSON.stringify(section)}>
-                  <h3
-                    className={`text-xl md:text-2xl font-semibold transition-colors ${
-                      activeSection === index
-                        ? "text-green-600"
-                        : "text-gray-900"
+      <Motion delay={0.2}>
+        <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 border border-gray-100">
+          <div className="space-y-6">
+            {sections.map((section, index) => (
+              <MotionHover scale={1.05} key={index}>
+                <div
+                  key={index}
+                  className={`border border-gray-200 rounded-2xl transition-all duration-500 ${activeSection === index
+                    ? "shadow-lg border-green-300"
+                    : "hover:border-green-200"
                     }`}
-                  >
-                    {section.title}
-                  </h3>
-                </HoverableText>
-                <ArrowRight
-                  className={`w-6 h-6 transition-all duration-300 ${
-                    activeSection === index
-                      ? "rotate-90 text-green-600"
-                      : "text-gray-400"
-                  }`}
-                />
-              </div>
+                >
+                  <Motion delay={0.2}>
+                    <div
+                      onClick={() =>
+                        setActiveSection(activeSection === index ? -1 : index)
+                      }
+                      className="w-full p-6 text-left flex items-center justify-between hover:bg-green-50 rounded-2xl transition-all duration-300"
+                    >
+                      <HoverableText text={JSON.stringify(section)}>
+                        <h3
+                          className={`text-xl md:text-2xl font-semibold transition-colors ${activeSection === index
+                            ? "text-green-600"
+                            : "text-gray-900"
+                            }`}
+                        >
+                          {section.title}
+                        </h3>
+                      </HoverableText>
+                      <ArrowRight
+                        className={`w-6 h-6 transition-all duration-300 ${activeSection === index
+                          ? "rotate-90 text-green-600"
+                          : "text-gray-400"
+                          }`}
+                      />
+                    </div>
+                  </Motion>
 
-              <div
-                className={`overflow-hidden transition-all duration-500 ${
-                  activeSection === index
-                    ? "max-h-96 opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <div className="px-6 pb-6">
-                  <ul className="space-y-3">
-                    {" "}
-                    {section.content.map((item, itemIndex) => (
-                      <li
-                        key={itemIndex}
-                        className="flex items-start space-x-3 transform transition-all duration-500 translate-y-0 opacity-100"
-                      >
-                        <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
-                        <p
-                          className="text-gray-700 leading-relaxed"
-                          dangerouslySetInnerHTML={{
-                            __html: item.replace(
-                              /\"([^\"]+)\"/g,
-                              '<strong class="text-green-600 bg-green-50 px-1 rounded">$1</strong>'
-                            ),
-                          }}
-                        />
-                      </li>
-                    ))}
-                  </ul>
+                  <Motion delay={0.2}>
+                    <div
+                      className={`overflow-hidden transition-all duration-500 ${activeSection === index
+                        ? "max-h-96 opacity-100"
+                        : "max-h-0 opacity-0"
+                        }`}
+                    >
+                      <div className="px-6 pb-6">
+                        <ul className="space-y-3">
+                          {" "}
+                          {section.content.map((item, itemIndex) => (
+                            <li
+                              key={itemIndex}
+                              className="flex items-start space-x-3 transform transition-all duration-500 translate-y-0 opacity-100"
+                            >
+                              <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0"></div>
+                              <p
+                                className="text-gray-700 leading-relaxed"
+                                dangerouslySetInnerHTML={{
+                                  __html: item.replace(
+                                    /\"([^\"]+)\"/g,
+                                    '<strong class="text-green-600 bg-green-50 px-1 rounded">$1</strong>'
+                                  ),
+                                }}
+                              />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </Motion>
                 </div>
-              </div>
-            </div>
-          ))}
+              </MotionHover>
+            ))}
+          </div>
         </div>
-      </div>
-    </div>
+      </Motion>
+    </div >
+
   );
 }

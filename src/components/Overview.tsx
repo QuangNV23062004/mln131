@@ -3,6 +3,7 @@ import React from "react";
 import { Tractor, Pickaxe, GraduationCap } from "lucide-react";
 import Motion from "./Motion";
 import MotionHover from "./MotionHover";
+import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 
 export default function Overview({ id }: { id: string }) {
   return (
@@ -32,6 +33,20 @@ export default function Overview({ id }: { id: string }) {
             (2021) đến với sinh viên và người quan tâm, dưới hình thức trực
             quan, dễ tiếp cận, phù hợp với thời đại số.
           </Motion>
+
+          <Motion>
+          <div className="flex justify-center mt-8">
+            <div className="w-76 h-60">
+              <DotLottieReact
+                src="https://lottie.host/7a9bbef9-adad-412e-a8ac-1b8e44b14ff3/8WaL9CZ8gr.lottie"
+                loop
+                autoplay
+                style={{ width: "100%", height: "100%" }}
+              />
+            </div>
+          </div>
+          </Motion>
+
 
           <div className="mt-8 grid md:grid-cols-3 gap-6">
             <MotionHover>
