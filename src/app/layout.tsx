@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AIChatBubble from "@/components/AIChatBubble";
 import LayoutWrapper from "@/components/LayoutWrapper";
+import ProgressBar from "@/components/ProgressBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,11 +29,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-hide">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <LayoutWrapper children={children}></LayoutWrapper>
+        <LayoutWrapper>
+          <ProgressBar />
+          {children}
+        </LayoutWrapper>
       </body>
     </html>
   );

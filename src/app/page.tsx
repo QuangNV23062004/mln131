@@ -3,6 +3,7 @@ import Hero from "@/components/Hero";
 import MainContext from "@/components/MainContext";
 import Navigation from "@/components/Navigation";
 import Overview from "@/components/Overview";
+import ProgressBar from "@/components/ProgressBar";
 import Reality from "@/components/Reality";
 import TableOfContent from "@/components/TableOfContent";
 import Theory from "@/components/Theory";
@@ -55,7 +56,8 @@ export default function Page() {
     });
   };
   return (
-    <div className="min-h-screen bg-white text-black">
+    <div className="min-h-screen bg-white text-black w-full">
+      <ProgressBar />
       <div id={tableOfContents[0].id}>
         <Navigation
           isScrolled={isScrolled}
